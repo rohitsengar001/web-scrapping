@@ -1,0 +1,13 @@
+table {
+  width: 100%;
+}
+.mx-10{
+  margin-left: 10px
+}
+.text-oveflow-hidden{
+  width: 70%;
+  display: inline-block;
+  overflow: hidden !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

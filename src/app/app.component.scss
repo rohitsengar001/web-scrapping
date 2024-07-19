@@ -1,0 +1,27 @@
+.my-container{
+  width: 1440px;
+  // height: 82px;
+  background: #FFFFFF;
+}
+input[type="search"] {
+  width: 25.25rem;
+  height: 2.625rem;
+  padding: .75rem 1rem;
+}
+
+#submit {
+  background: var(--Accent-Light, #ede5ff);
+  color: var(--Purple, rgba(108, 43, 217, 1));
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.94px;
+  text-align: center;
+  height: 93%;
+}
+
+::ng-deep {
+  .mat-mdc-header-cell{
+    background-color: rgba(249, 250, 251, 1) !important;
+  
+  } 
+}

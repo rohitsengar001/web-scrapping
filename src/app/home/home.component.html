@@ -1,0 +1,217 @@
+<div class="mat-elevation-z8 rounded-2">
+  <div class="d-flex justify-content-start pt-4">
+    <div class="p-2 mx-3">0 selected</div>
+    <button class="p-2" mat-raised-button (click)="deleteRow()" [disabled]="isLoading">
+      Delete<mat-icon *ngIf="isLoading"
+        ><mat-spinner diameter="15"></mat-spinner
+      ></mat-icon>
+    </button>
+    <button class="p-2 mx-3" mat-raised-button (click)="downlaodCsv()">
+      <svg
+        width="17"
+        height="18"
+        viewBox="0 0 17 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M7.79167 9H2.125H7.79167Z" fill="#A2A2A2" />
+        <path
+          d="M7.79167 9H2.125"
+          stroke="#A2A2A2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M11.3333 4.75H2.125"
+          stroke="#A2A2A2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M11.3333 13.25H2.125"
+          stroke="#A2A2A2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M12.75 6.875V11.125"
+          stroke="#A2A2A2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M14.875 9H10.625"
+          stroke="#A2A2A2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      Export as CSV
+    </button>
+    <!-- <div class="col">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-3">
+    </div> -->
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mt-1">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef class="p-1">
+        <mat-checkbox
+          (change)="$event ? toggleAllRows() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row" class="p-1">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="company.logo">
+      <th mat-header-cell *matHeaderCellDef style="width: 33px;" class="p-0"></th>
+      <td mat-cell *matCellDef="let element" style="width: 33px;" class="p-0 text-center">
+        <img [src]="element.company.logo" width="25" height="25" />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef>COMPANY</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="mx-2 ">{{
+          displayName(element.company?.name)
+        }}</span>
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>DESCRIPTION</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.description | slice : 0 : 60 }}...
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="socialProfiles">
+      <th mat-header-cell *matHeaderCellDef >SOCIAL PROFILES</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="text-center">
+          <a
+            class=""
+            [href]="element.socialProfiles?.facebook"
+            target="_blank"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_19_5339)">
+                <path
+                  d="M15.2001 7.615C15.2001 3.47287 11.8422 0.115004 7.70007 0.115004C3.55793 0.115004 0.200073 3.47287 0.200073 7.615C0.200073 11.3584 2.9427 14.4612 6.5282 15.0239V9.78297H4.6239V7.615H6.5282V5.96266C6.5282 4.08297 7.64793 3.04469 9.36106 3.04469C10.1814 3.04469 11.0399 3.19118 11.0399 3.19118V5.03688H10.0942C9.16257 5.03688 8.87195 5.61505 8.87195 6.20875V7.615H10.952L10.6195 9.78297H8.87195V15.0239C12.4574 14.4612 15.2001 11.3584 15.2001 7.615Z"
+                  fill="#ECECEC"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_19_5339">
+                  <rect
+                    width="15"
+                    height="15"
+                    fill="white"
+                    transform="translate(0.200073 0.115004)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+          <a [href]="element.socialProfiles?.twitter" class="mx-2" target="_blank">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_19_5340)">
+                <path
+                  d="M4.91892 13.7088C10.5779 13.7088 13.674 9.01922 13.674 4.95369C13.674 4.82186 13.6711 4.68709 13.6652 4.55526C14.2675 4.11969 14.7873 3.58019 15.2001 2.96209C14.6391 3.21166 14.0436 3.37464 13.4338 3.44549C14.0759 3.0606 14.5567 2.45595 14.787 1.74363C14.1829 2.10163 13.5223 2.35416 12.8335 2.49041C12.3693 1.99726 11.7557 1.67073 11.0874 1.56131C10.4191 1.4519 9.73332 1.56569 9.13616 1.88509C8.53901 2.20449 8.0637 2.71172 7.78373 3.32835C7.50376 3.94498 7.43472 4.63666 7.58728 5.29647C6.36413 5.23509 5.16753 4.91735 4.07506 4.36384C2.98259 3.81034 2.01863 3.03343 1.24568 2.08348C0.852823 2.76081 0.732609 3.56231 0.909467 4.32509C1.08633 5.08787 1.54699 5.75468 2.19783 6.19002C1.70922 6.17451 1.23131 6.04296 0.803589 5.80623V5.84432C0.803151 6.55512 1.04888 7.24415 1.49902 7.79426C1.94915 8.34438 2.5759 8.72163 3.27273 8.8619C2.82011 8.98574 2.34506 9.00378 1.88435 8.91463C2.08098 9.52593 2.46356 10.0606 2.97868 10.444C3.4938 10.8274 4.11577 11.0404 4.75779 11.0533C3.66784 11.9095 2.32143 12.3739 0.935425 12.3717C0.689628 12.3713 0.444073 12.3562 0.200073 12.3265C1.60811 13.2299 3.24603 13.7096 4.91892 13.7088Z"
+                  fill="#ECECEC"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_19_5340">
+                  <rect
+                    width="15"
+                    height="15"
+                    fill="white"
+                    transform="translate(0.200073 0.115004)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+          <a [href]="element.socialProfiles?.linkedin" class="mx-1" target="_blank">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_19_5341)">
+                <path
+                  d="M14.0897 0.115004H1.3075C0.69519 0.115004 0.200073 0.598402 0.200073 1.19606V14.031C0.200073 14.6287 0.69519 15.115 1.3075 15.115H14.0897C14.702 15.115 15.2001 14.6287 15.2001 14.0339V1.19606C15.2001 0.598402 14.702 0.115004 14.0897 0.115004ZM4.65027 12.8972H2.42371V5.73707H4.65027V12.8972ZM3.53699 4.76149C2.82214 4.76149 2.245 4.18434 2.245 3.47243C2.245 2.76051 2.82214 2.18336 3.53699 2.18336C4.2489 2.18336 4.82605 2.76051 4.82605 3.47243C4.82605 4.18141 4.2489 4.76149 3.53699 4.76149ZM12.9823 12.8972H10.7587V9.41676C10.7587 8.58766 10.744 7.51832 9.60144 7.51832C8.44421 7.51832 8.26843 8.4236 8.26843 9.35817V12.8972H6.04773V5.73707H8.18054V6.71559H8.20984C8.50574 6.15309 9.2323 5.55836 10.3134 5.55836C12.5663 5.55836 12.9823 7.04079 12.9823 8.96852V12.8972Z"
+                  fill="#ECECEC"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_19_5341">
+                  <rect
+                    width="15"
+                    height="15"
+                    fill="white"
+                    transform="translate(0.200073 0.115004)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+        </span>
+      </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>ADDRESS</th>
+      <td mat-cell *matCellDef="let element">{{ element.address  | slice: 0: 40}}...</td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>PHONE NO.</th>
+      <td mat-cell *matCellDef="let element">{{ (element?.phone || '') | formatphone: ['+91'] }}</td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>EMAIL</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
