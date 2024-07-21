@@ -9,6 +9,7 @@ export class FormatphonePipe implements PipeTransform {
     input: string,
     arg : Array<string>
   ): unknown {
+    if(input.length === 0) return ''
     let cleanedInput = input;
     let specialCharactersToRemove = ['-', ' ']
     specialCharactersToRemove= [...specialCharactersToRemove,...arg]

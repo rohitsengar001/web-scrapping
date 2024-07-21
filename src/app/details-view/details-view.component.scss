@@ -1,0 +1,50 @@
+.logo {
+  width: 152px;
+  height: 152px;
+}
+
+/* Extra small devices (phones, less than 600px) */
+@media (max-width: 599px) {
+  
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) {
+  .clm-6 {
+    margin-left: 6rem;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) {
+  .clm-6 {
+    margin-left: 5rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .clm-6 {
+    margin-left: 4rem;
+  }
+}
+
+ul {
+  list-style: outside none none;
+}
+
+li.arrange-size-fit {
+  display: table-cell;
+  padding: 0;
+  vertical-align: top;
+}
+
+.bg-heading {
+  color: rgba(100, 116, 139, 1);
+}
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+  max-width: 58.063rem;
+}
+

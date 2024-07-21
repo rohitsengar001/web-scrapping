@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgOptimizedImage } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormatphonePipe } from './cors/pipes/formatphone.pipe';
+import { DetailsViewComponent } from './details-view/details-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DetailsViewComponent
   ],
   imports: [
     BrowserModule,

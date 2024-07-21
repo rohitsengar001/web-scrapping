@@ -1,12 +1,11 @@
-.my-container{
-  width: 1440px;
-  // height: 82px;
-  background: #FFFFFF;
-}
-input[type="search"] {
+input[type=search] {
   width: 25.25rem;
   height: 2.625rem;
-  padding: .75rem 1rem;
+  padding: 10px 20px 12px 40px !important;
+  background-image: url('../assets/img/lense-icon.png') !important;
+  background-position: 10px 8px !important; 
+  background-repeat: no-repeat !important;
+  box-sizing: border-box !important;
 }
 
 #submit {
@@ -18,10 +17,28 @@ input[type="search"] {
   text-align: center;
   height: 93%;
 }
-
 ::ng-deep {
   .mat-mdc-header-cell{
     background-color: rgba(249, 250, 251, 1) !important;
-  
   } 
+}
+
+/* Extra small devices (phones, less than 600px) */
+@media (max-width: 599px) {
+  #submit,.button{
+    width: 100%;
+  }
+  input[type=search]{
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 768px) {
+  input[type=search]{
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+  #submit,.button{
+    width: 100%;
+  }
 }

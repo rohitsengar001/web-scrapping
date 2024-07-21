@@ -1,21 +1,31 @@
 <nav class="navbar bg-body-light border">
   <div class="container-fluid mx-4 p-2">
-    <div class="d-flex" role="search">
+    <div class="d-md-flex flex-fill" role="search">
       <input
         class="form-control me-2 p-3"
         type="search"
         placeholder="Search"
         aria-label="Search"
         [formControl]="searchControl"
-        [ngClass]="{ 'is-invalid': isInvalid }"
+        [ngClass]="{ 'is-invalid': searchControl.invalid}"
         style="background: rgba(249, 250, 251, 1)"
       />
-      <button class="btn my-auto p-2" id="submit" (click)="fetchDetails()" mat-raised-button>
-        Fetch & Save Details
-        <mat-icon *ngIf="isLoading" matSuffix
-        ><mat-spinner diameter="18" color="accent"></mat-spinner
-      ></mat-icon>
-      </button>
+
+      <div
+        [ngClass]="{ 'mx-3 p-1': screen === 'laptop' || screen === 'desktop' }"
+      >
+        <button
+          class="btn my-auto p-2"
+          id="submit"
+          (click)="fetchDetails()"
+          mat-raised-button
+        >
+          Fetch & Save Details
+          <mat-icon *ngIf="isLoading" matSuffix
+            ><mat-spinner diameter="18" color="accent"></mat-spinner
+          ></mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </nav>

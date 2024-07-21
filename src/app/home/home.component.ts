@@ -42,7 +42,8 @@ export class HomeComponent {
     this._scrappingService.latestRecord$.subscribe((res) => {
       // const newRecord = new MatTableDataSource<ScrappingRecord>(res)
       console.log(res);
-      this.dataSource.data = [res, ...this.dataSource.data];
+      if (this.dataSource?.data)
+        this.dataSource.data = [res, ...this.dataSource.data];
     });
   }
   ngAfterViewInit() {
@@ -128,5 +129,8 @@ export class HomeComponent {
 
   displayName(name: string) {
     return name?.split(/[-\s]+/)[0];
+  }
+  setCurrentCompany(row: ScrappingRecord) {
+    this._scrappingService.latestRecord$.next(row);
   }
 }

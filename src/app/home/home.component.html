@@ -1,12 +1,12 @@
-<div class="mat-elevation-z8 rounded-2">
-  <div class="d-flex justify-content-start pt-4">
-    <div class="p-2 mx-3">0 selected</div>
-    <button class="p-2" mat-raised-button (click)="deleteRow()" [disabled]="isLoading">
+<div class="mat-elevation-z8 rounded-2 mt-1">
+  <div class="d-flex justify-content-start py-3">
+    <div class="p-2 mx-3">{{selection.selected.length}} selected</div>
+    <button class="p-2 mx-4" mat-raised-button (click)="deleteRow()" [disabled]="isLoading">
       Delete<mat-icon *ngIf="isLoading"
         ><mat-spinner diameter="15"></mat-spinner
       ></mat-icon>
     </button>
-    <button class="p-2 mx-3" mat-raised-button (click)="downlaodCsv()">
+    <button class="p-2 mx-1" mat-raised-button (click)="downlaodCsv()">
       <svg
         width="17"
         height="18"
@@ -86,9 +86,9 @@
     <ng-container matColumnDef="company">
       <th mat-header-cell *matHeaderCellDef>COMPANY</th>
       <td mat-cell *matCellDef="let element">
-        <span class="mx-2 ">{{
+        <a class="mx-2" [routerLink]="['/detail-view',element.id]" (click)="setCurrentCompany(element)">{{
           displayName(element.company?.name)
-        }}</span>
+        }}</a>
       </td>
     </ng-container>
 
