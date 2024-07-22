@@ -33,12 +33,16 @@ export class ScrappingService {
   }
 
   getScreenshot(url: string): Observable<Blob> {
-    const headers = new HttpHeaders().set('Accept', 'image/png');
+    const headers = new HttpHeaders();
+    headers.append("Content-Type", "application/png")
+    headers.append('Accept', 'image/png');
+    headers.append('Access-Control-Allow-Origin', '*');
+
     return this._http.post(
       `${environment.API_URL}/url-to-image`,
       { url: url },
       {
-        headers,
+        headers: headers,
         responseType: 'blob',
       }
     );
